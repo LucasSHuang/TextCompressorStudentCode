@@ -1,9 +1,9 @@
-Name: YOUR NAME HERE
+Name: Lucas
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date    |     Time      |                                                                                                                                                                                                                                                                                                                                                                           Update |
+|:--------|:-------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| April 5 |    9-10pm     |                                                                                                                                                                                                                                                                                                                                       I tried to write abstract, efficient code. |
+| Dec 2   | 11:40-11:55pm | I began thinking about how to solve the problem set. Right now I'm thinking of solving it in the way of Vikram's idea where you make every word a differnt "code" of 8 bits. I just need to figure out a way to put them in a map because I feel like that would take so much time because then you would have to read through the entire text first to add every possible word. |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
