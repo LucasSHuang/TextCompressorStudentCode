@@ -25,14 +25,18 @@
  *  The {@code TextCompressor} class provides static methods for compressing
  *  and expanding natural language through textfile input.
  *
- *  @author Zach Blick, YOUR NAME HERE
+ *  @author Zach Blick, Lucas Huang
  */
 public class TextCompressor {
 
     private static void compress() {
-
+        Trie trie = new Trie();
+        String text = BinaryStdIn.readString();
+        String[] words = text.split(" ");
         // TODO: Complete the compress() method
-
+        for (int i = 0; i < words.length; i++) {
+            trie.insert(words[i]);
+        }
         BinaryStdOut.close();
     }
 
