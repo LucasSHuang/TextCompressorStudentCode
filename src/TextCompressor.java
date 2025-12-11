@@ -29,13 +29,28 @@
  */
 public class TextCompressor {
 
+    public static final int END_FILE = 128;
+    public static final int MAX_VALUES = 255;
+
     private static void compress() {
-        Trie trie = new Trie();
         String text = BinaryStdIn.readString();
-        String[] words = text.split(" ");
-        // TODO: Complete the compress() method
-        for (int i = 0; i < words.length; i++) {
-            trie.insert(words[i]);
+        TST tst= new TST();
+        for (int i = 0; i < END_FILE; i++) {
+            tst.insert(Integer.toString(i), i);
+        }
+
+        int index = 0;
+        int current = END_FILE + 1;
+        while (!BinaryStdIn.isEmpty()) {
+            String prefix = tst.getLongestPrefix(text, index);
+            int code = tst.lookup(prefix);
+            BinaryStdOut.write(code);
+            if (current < MAX_VALUES) {
+                // Insert new code
+                tst.insert(prefix + text.charAt(index + 1), current++);
+                current++;
+            }
+            index += prefix.length();
         }
         BinaryStdOut.close();
     }
