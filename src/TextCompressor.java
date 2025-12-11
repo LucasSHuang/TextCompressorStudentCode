@@ -31,27 +31,30 @@ public class TextCompressor {
 
     public static final int END_FILE = 128;
     public static final int MAX_VALUES = 255;
+    public static final int BIT_VALUE = 8;
 
     private static void compress() {
         String text = BinaryStdIn.readString();
         TST tst= new TST();
         for (int i = 0; i < END_FILE; i++) {
-            tst.insert(Integer.toString(i), i);
+            tst.insert("" + (char) i, i);
         }
 
         int index = 0;
         int current = END_FILE + 1;
-        while (!BinaryStdIn.isEmpty()) {
+        while (index < text.length()) {
             String prefix = tst.getLongestPrefix(text, index);
+            int plength = prefix.length();
             int code = tst.lookup(prefix);
-            BinaryStdOut.write(code);
-            if (current < MAX_VALUES) {
+            BinaryStdOut.write(code, BIT_VALUE);
+            if (current <= MAX_VALUES && index + plength < text.length()) {
                 // Insert new code
-                tst.insert(prefix + text.charAt(index + 1), current++);
+                tst.insert(prefix + text.charAt(index + plength), current);
                 current++;
             }
             index += prefix.length();
         }
+        BinaryStdOut.write(END_FILE, BIT_VALUE);
         BinaryStdOut.close();
     }
 
