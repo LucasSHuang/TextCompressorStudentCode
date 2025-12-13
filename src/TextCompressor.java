@@ -41,16 +41,16 @@ public class TextCompressor {
         }
 
         int index = 0;
-        int current = END_FILE + 1;
+        int largestCode = END_FILE + 1;
         while (index < text.length()) {
             String prefix = tst.getLongestPrefix(text, index);
             int plength = prefix.length();
             int code = tst.lookup(prefix);
             BinaryStdOut.write(code, BIT_VALUE);
-            if (current <= MAX_VALUES && index + plength < text.length()) {
+            if (largestCode <= MAX_VALUES && index + plength < text.length()) {
                 // Insert new code
-                tst.insert(prefix + text.charAt(index + plength), current);
-                current++;
+                tst.insert(prefix + text.charAt(index + plength), largestCode);
+                largestCode++;
             }
             index += prefix.length();
         }
@@ -59,9 +59,26 @@ public class TextCompressor {
     }
 
     private static void expand() {
-
-        // TODO: Complete the expand() method
-
+        String[] prefixes = new String[MAX_VALUES + 1];
+        for (int i = 0; i < END_FILE; i++) {
+            prefixes[i] = "" + (char) i;
+        }
+        int largestCode = END_FILE + 1;
+        int code = BinaryStdIn.readInt(BIT_VALUE);
+        while (code != END_FILE) {
+            String prefix = prefixes[code];
+            BinaryStdOut.write(prefix);
+            int nextCode = BinaryStdIn.readInt(BIT_VALUE);
+            String nextPrefix = prefixes[nextCode];
+            if (nextCode == largestCode) {
+                nextPrefix = prefix + prefix.charAt(0);
+            }
+            if (largestCode <= MAX_VALUES) {
+                prefixes[largestCode] = prefix + nextPrefix.charAt(0);
+                largestCode++;
+            }
+            code = nextCode;
+        }
         BinaryStdOut.close();
     }
 
